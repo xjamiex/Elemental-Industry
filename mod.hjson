@@ -1,20 +1,20 @@
 #the mod name as displayed in-game
-displayName: "Java Mod Template"
+displayName: "Elemental Industry"
 
 #the internal name of your mod
-name: "example-java-mod"
+name: "elemental-industry"
 
 #your name
-author: "You"
+author: "xjammuux, froomeeth"
 
 #the fully qualified main class of the mod
-main: "example.ExampleJavaMod"
+main: "elementalindustry.ElementalIndustry"
 
 #the mod description as seen in the mod dialog
-description: "A Mindustry Java mod template."
+description: "A average mindustry mod :D"
 
 #the mod version
-version: 1.0
+version: 0.1.0
 
 #the minimum game build required to run this mod
 minGameVersion: 140
