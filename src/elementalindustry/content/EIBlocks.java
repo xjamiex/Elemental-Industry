@@ -5,10 +5,12 @@ import arc.graphics.Color;
 import arc.math.Interp;
 import mindustry.content.Fx;
 import mindustry.content.Items;
+import mindustry.content.Liquids;
 import mindustry.entities.bullet.BasicBulletType;
 import mindustry.entities.bullet.MissileBulletType;
 import mindustry.entities.effect.MultiEffect;
 import mindustry.entities.effect.ParticleEffect;
+import mindustry.entities.effect.WaveEffect;
 import mindustry.entities.part.RegionPart;
 import mindustry.gen.Sounds;
 import mindustry.type.Category;
@@ -35,72 +37,32 @@ public class EIBlocks {
                     under = false;
                     outline = true;
                     moveY = 5f;
-                    progress = PartProgress.reload;
+                    progress = PartProgress.warmup;
                 }});
 
-                parts.add(new RegionPart("-left-wing") {{
+                parts.add(new RegionPart("-wing") {{
+                    x = 0;
+                    y = 0;
                     under = false;
                     outline = true;
                     moveY = -3f;
                     moveX = -5f;
-                    progress = PartProgress.reload;
-                }});
-
-                parts.add(new RegionPart("-right-wing") {{
-                    under = false;
-                    outline = true;
-                    moveY = -3f;
-                    moveX = 5f;
-                    progress = PartProgress.reload;
+                    progress = PartProgress.warmup;
+                    mirror = true;
+                    turretShading = true;
                 }});
             }};
 
-            range = 500;
-            shootSound = Sounds.shootBig;
+            range = 300;
+            shootSound = Sounds.malignShoot;
             reload = 100;
 
             hasPower = true;
             consumesPower = true;
-            consumePower(8f);
-            requirements(Category.turret, BuildVisibility.shown, ItemStack.with(Items.lead, 430, Items.silicon, 450, Items.plastanium, 280, EIItems.infusedDarkEnergy, 100, EIItems.nightCrystal, 80));
+            consumePower(10f);
+            requirements(Category.turret, BuildVisibility.shown, ItemStack.with(Items.copper, 1200, Items.lead, 1100, Items.silicon, 760, Items.plastanium, 430, EIItems.infusedDarkEnergy, 230, EIItems.nightCrystal, 120));
 
-            shootType = new MissileBulletType(5, 64) {{
-                sprite = "elemental-industry-orb-bullet";
-                lifetime = 100;
-                reflectable = true;
-                ammoMultiplier = 2;
-                trailColor = Color.valueOf("6773f5");
-                frontColor = Color.valueOf("6773f5");
-                backColor = Color.valueOf("4935bd");
-                shrinkY = shrinkX = 0;
-
-                width = 40;
-                height = 40;
-                trailWidth = 5;
-                trailLength = 40;
-                hitEffect = despawnEffect = new MultiEffect(
-                    new ParticleEffect() {{
-                        colorFrom = Color.valueOf("6773f5");
-                        colorTo = Color.valueOf("4935bd");
-                        particles = 50;
-                        sizeFrom = 5;
-                        sizeTo = 1;
-                        sizeInterp = Interp.exp10In;
-                        lifetime = 200f;
-                    }}
-                );
-            }};
-
-            shootEffect = new ParticleEffect() {{
-                colorFrom = Color.valueOf("6773f5");
-                colorTo = Color.valueOf("4935bd");
-                particles = 34;
-                sizeFrom = 4;
-                sizeTo = 1;
-                sizeInterp = Interp.exp10In;
-                cone = 50f;
-                lifetime = 80f;
-            }};
+            shootType = EIBullets.psycheotrisStar;
         }};
     }
 }
