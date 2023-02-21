@@ -2,14 +2,18 @@ package elementalindustry.content;
 
 import arc.graphics.Color;
 import arc.math.Interp;
+import elementalindustry.custom.bullets.VineLaserBulletType;
 import mindustry.content.Liquids;
 import mindustry.content.StatusEffects;
+import mindustry.entities.Effect;
 import mindustry.entities.bullet.BulletType;
+import mindustry.entities.bullet.LaserBulletType;
 import mindustry.entities.bullet.MissileBulletType;
 import mindustry.entities.effect.MultiEffect;
 import mindustry.entities.effect.ParticleEffect;
 import mindustry.entities.effect.WaveEffect;
 import mindustry.gen.Sounds;
+import mindustry.graphics.Pal;
 
 public class EIBullets {
     public static BulletType
@@ -31,6 +35,8 @@ public class EIBullets {
             height = 4;
             trailWidth = 5;
             trailLength = 40;
+            hitSound = Sounds.explosion;
+
             hitEffect = despawnEffect = new MultiEffect(
                     new ParticleEffect() {{
                         colorFrom = Color.valueOf("9c68fc");
@@ -73,5 +79,46 @@ public class EIBullets {
                 lifetime = 80f;
                 length = 20f;
             }};
-        }};
-    }
+        }},
+
+        smallGreenMissile = new MissileBulletType(7, 50) {{
+            frontColor = backColor = trailColor = EIPal.arcaneGreenLight;
+            shrinkY = shrinkX = 0;
+            sprite = "elemental-industry-diamond-bullet";
+            height = 10;
+            width = 10;
+
+            shootEffect = EIFx.greenStar;
+
+            hitSound = Sounds.malignShoot;
+            hitEffect = despawnEffect = new ParticleEffect() {{
+                colorFrom = EIPal.arcaneGreenLight;
+                colorTo = EIPal.arcaneGreenLight;
+                particles = 10;
+                sizeFrom = 5;
+                sizeTo = 1;
+                sizeInterp = Interp.exp10In;
+                lifetime = 80f;
+                length = 70f;
+            }};
+        }},
+
+        bigGreenLaser = new VineLaserBulletType(680) {{
+            length = 620;
+            width = 40;
+            lifetime = 140f;
+            colors = new Color[] {EIPal.arcaneGreenDark, EIPal.arcaneGreenLight, Color.white};
+
+            shootEffect = new ParticleEffect() {{
+                colorFrom = EIPal.arcaneGreenLight;
+                colorTo = EIPal.arcaneGreenLight;
+                particles = 10;
+                sizeFrom = 20;
+                sizeTo = 1;
+                sizeInterp = Interp.exp10In;
+                lifetime = 80f;
+                length = 70f;
+            }};
+        }}
+    ;
+}
