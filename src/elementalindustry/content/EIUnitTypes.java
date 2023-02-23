@@ -105,6 +105,7 @@ public class EIUnitTypes {
                 top = false;
                 reload = 8f;
                 inaccuracy = 2f;
+                rotate = true;
 
                 bullet = EIBullets.smallGreenMissile;
             }});
@@ -116,6 +117,7 @@ public class EIUnitTypes {
                 top = false;
                 reload = 10f;
                 inaccuracy = 6f;
+                rotate = true;
 
                 bullet = EIBullets.smallGreenMissile;
             }});
@@ -127,6 +129,7 @@ public class EIUnitTypes {
                 top = false;
                 reload = 13f;
                 inaccuracy = 5f;
+                rotate = true;
 
                 bullet = EIBullets.smallGreenMissile;
             }});
