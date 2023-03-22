@@ -8,6 +8,7 @@ import mindustry.content.Items;
 import mindustry.content.Liquids;
 import mindustry.content.StatusEffects;
 import mindustry.entities.bullet.BasicBulletType;
+import mindustry.entities.bullet.BulletType;
 import mindustry.entities.bullet.MissileBulletType;
 import mindustry.entities.effect.MultiEffect;
 import mindustry.entities.effect.ParticleEffect;
@@ -33,7 +34,8 @@ public class EIBlocks {
             //turret
             psycheotris,
             //swarmer
-            swarmling, hive, colony, society, civilisation
+            swarmling, hive, colony, society, civilisation,
+            flame, blaze
     ;
 
     public static void load() {
@@ -421,12 +423,174 @@ public class EIBlocks {
             inaccuracy = 8f;
             range = 480f;
             consumeAmmoOnce = false;
+            ammoPerShot = 10;
             size = 6;
             shootSound = Sounds.shootBig;
             envEnabled |= Env.space;
             health = 9980;
 
             coolant = consumeCoolant(0.3f);
+        }};
+
+        flame = new ItemTurret("flame"){{
+            requirements(Category.turret, with(Items.copper, 120, Items.graphite, 240, Items.silicon, 540));
+            ammo(
+                    Items.coal, new BulletType(2f, 23f){{
+                        ammoMultiplier = 3f;
+                        hitSize = 7f;
+                        lifetime = 18f;
+                        pierce = true;
+                        collidesAir = false;
+                        statusDuration = 60f * 4;
+                        shootEffect = new MultiEffect(new ParticleEffect() {{
+                            colorFrom = Pal.lightFlame;
+                            colorTo = Pal.darkFlame;
+                            particles = 15;
+                            sizeFrom = 2;
+                            sizeTo = 1;
+                            sizeInterp = Interp.exp10In;
+                            lifetime = 50f;
+                            length = 100f;
+                            cone = 25;
+                        }},
+                        new ParticleEffect() {{
+                            colorFrom = Pal.lightishGray;
+                            colorTo = Pal.darkishGray;
+                            particles = 15;
+                            sizeFrom = 1;
+                            sizeTo = 0.5f;
+                            sizeInterp = Interp.exp10In;
+                            lifetime = 40f;
+                            length = 80f;
+                            cone = 25;
+                        }});
+                        hitEffect = Fx.hitFlameSmall;
+                        despawnEffect = Fx.none;
+                        status = StatusEffects.burning;
+                        keepVelocity = false;
+                        hittable = false;
+                    }},
+                    Items.pyratite, new BulletType(3f, 113f){{
+                        ammoMultiplier = 6f;
+                        hitSize = 7f;
+                        lifetime = 18f;
+                        pierce = true;
+                        collidesAir = false;
+                        statusDuration = 60f * 10;
+                        shootEffect = new ParticleEffect() {{
+                            colorFrom = Pal.lightFlame;
+                            colorTo = Pal.darkFlame;
+                            particles = 15;
+                            sizeFrom = 2;
+                            sizeTo = 1;
+                            sizeInterp = Interp.exp10In;
+                            lifetime = 50f;
+                            length = 100f;
+                            cone = 25;
+                        }};
+                        despawnEffect = Fx.none;
+                        status = StatusEffects.burning;
+                        hittable = false;
+
+                    }},
+                    Items.blastCompound, new BulletType(2f, 150f){{
+                        ammoMultiplier = 6f;
+                        hitSize = 7f;
+                        lifetime = 18f;
+                        pierce = true;
+                        collidesAir = false;
+                        statusDuration = 60f * 10;
+                        shootEffect = new ParticleEffect() {{
+                            colorFrom = Pal.lightFlame;
+                            colorTo = Pal.darkFlame;
+                            particles = 15;
+                            sizeFrom = 2;
+                            sizeTo = 1;
+                            sizeInterp = Interp.exp10In;
+                            lifetime = 50f;
+                            length = 100f;
+                            cone = 25;
+                        }};
+                        despawnEffect = Fx.none;
+                        status = StatusEffects.burning;
+                        hittable = false;
+
+                    }}
+            );
+            recoil = 0f;
+            reload = 4f;
+            coolantMultiplier = 1.5f;
+            range = 100f;
+            shootCone = 35f;
+            targetAir = false;
+            ammoUseEffect = Fx.none;
+            health = 400;
+            shootSound = Sounds.flame;
+            coolant = consumeCoolant(0.1f);
+            size = 2;
+        }};
+
+        blaze = new ItemTurret("blaze"){{
+            requirements(Category.turret, with(Items.copper, 220, Items.graphite, 360, Items.silicon, 650, Items.plastanium, 130));
+            ammo(
+                    Items.pyratite, new BulletType(5f, 183f){{
+                        ammoMultiplier = 6f;
+                        hitSize = 7f;
+                        lifetime = 24f;
+                        pierce = true;
+                        collidesAir = false;
+                        statusDuration = 60f * 10;
+                        shootEffect = new ParticleEffect() {{
+                            colorFrom = Pal.lightFlame;
+                            colorTo = Pal.darkFlame;
+                            particles = 15;
+                            sizeFrom = 2;
+                            sizeTo = 1;
+                            sizeInterp = Interp.exp10In;
+                            lifetime = 50f;
+                            length = 100f;
+                            cone = 25;
+                        }};
+                        despawnEffect = Fx.none;
+                        status = StatusEffects.burning;
+                        hittable = false;
+
+                    }},
+                    Items.blastCompound, new BulletType(2f, 199f){{
+                        ammoMultiplier = 6f;
+                        hitSize = 7f;
+                        lifetime = 24f;
+                        pierce = true;
+                        collidesAir = false;
+                        statusDuration = 60f * 10;
+                        shootEffect = new ParticleEffect() {{
+                            colorFrom = Pal.lightFlame;
+                            colorTo = Pal.darkFlame;
+                            particles = 28;
+                            sizeFrom = 2;
+                            sizeTo = 1;
+                            sizeInterp = Interp.exp10In;
+                            lifetime = 50f;
+                            length = 100f;
+                            cone = 25;
+                        }};
+                        despawnEffect = Fx.none;
+                        status = StatusEffects.burning;
+                        hittable = false;
+
+                    }}
+            );
+            recoil = 0f;
+            reload = 4f;
+            coolantMultiplier = 1.5f;
+            range = 100f;
+            shootCone = 35f;
+            targetAir = false;
+            ammoUseEffect = Fx.none;
+            health = 400;
+            shootSound = Sounds.flame;
+            coolant = consumeCoolant(0.1f);
+            size = 3;
         }};
     }
 }

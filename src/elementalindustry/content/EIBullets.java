@@ -2,10 +2,7 @@ package elementalindustry.content;
 
 import arc.graphics.Color;
 import arc.math.Interp;
-import elementalindustry.custom.bullets.VineLaserBulletType;
-import mindustry.content.Liquids;
 import mindustry.content.StatusEffects;
-import mindustry.entities.Effect;
 import mindustry.entities.bullet.BulletType;
 import mindustry.entities.bullet.LaserBulletType;
 import mindustry.entities.bullet.MissileBulletType;
@@ -13,7 +10,6 @@ import mindustry.entities.effect.MultiEffect;
 import mindustry.entities.effect.ParticleEffect;
 import mindustry.entities.effect.WaveEffect;
 import mindustry.gen.Sounds;
-import mindustry.graphics.Pal;
 
 public class EIBullets {
     public static BulletType
@@ -103,7 +99,7 @@ public class EIBullets {
             }};
         }},
 
-        bigGreenLaser = new VineLaserBulletType(680) {{
+        bigGreenLaser = new LaserBulletType(680) {{
             length = 620;
             width = 40;
             lifetime = 140f;
